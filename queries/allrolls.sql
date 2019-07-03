@@ -1,0 +1,11 @@
+INSERT INTO rolls (Name, creative) VALUES('Producer', 1);
+INSERT INTO rolls (Name, creative) VALUES('Songwriter', 1);
+INSERT INTO rolls (Name, creative) VALUES('Frontman', 0);
+INSERT INTO rolls (Name, creative) VALUES('Vocals', 0);
+INSERT INTO rolls (Name, creative) VALUES('Lead Guitar', 0);
+INSERT INTO rolls (Name, creative) VALUES('Rhythm Guitar', 0);
+INSERT INTO rolls (Name, creative) VALUES('Bass', 0);
+INSERT INTO rolls (Name, creative) VALUES('Drummer', 0);
+INSERT INTO rolls (Name, creative) VALUES('Keyboard', 0);
+INSERT INTO rolls (Name, creative) VALUES('Strings', 0);
+INSERT INTO rolls (Name, creative) VALUES('Brass', 0);
