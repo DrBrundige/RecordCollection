@@ -13,6 +13,8 @@ namespace IntroToEntity.Models
 		[Required]
 		public string Name { get; set; }
 
+		public string GivenName { get; set; }
+
 		[NotMapped]
 		public List<string> Rolls { get; set; }
 

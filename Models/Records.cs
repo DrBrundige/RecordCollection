@@ -39,14 +39,14 @@ namespace IntroToEntity.Models
 
 		public string Certification { get; set; }
 
-		[NotMapped]
-		public int NoSongs { get; set; }
+		// [NotMapped]
+		// public int NoSongs { get; set; }
 
-		[NotMapped]
-		public int HolisticScore { get; set; }
+		// [NotMapped]
+		// public int HolisticScore { get; set; }
 
-		[NotMapped]
-		public int EightScore { get; set; }
+		// [NotMapped]
+		// public int EightScore { get; set; }
 
 		public DateTime CreatedAt { get; set; }
 		public DateTime UpdatedAt { get; set; }

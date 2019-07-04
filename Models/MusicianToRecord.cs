@@ -17,6 +17,13 @@ namespace IntroToEntity.Models
 		[Required]
 		public int RollId { get; set; }
 
+		[NotMapped]
+		public string MusicianName { get; set; }
+		[NotMapped]
+		public string RecordName { get; set; }
+		[NotMapped]
+		public string RollName { get; set; }
+
 		public Musician Musician { get; set; }
 		public Record Record { get; set; }
 		public Roll Roll { get; set; }
