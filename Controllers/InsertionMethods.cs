@@ -235,6 +235,7 @@ namespace IntroToEntity.Controllers
 			foreach (Song song in songsList)
 			{
 				Dictionary<string, string> niceSong = new Dictionary<string, string>();
+				niceSong.Add("ID", song.SongId.ToString());
 				niceSong.Add("name", song.Name);
 				niceSong.Add("score", (song.Score).ToString());
 				niceSong.Add("tracklisting", song.TrackListing.ToString());
@@ -287,8 +288,6 @@ namespace IntroToEntity.Controllers
 
 			return SongNames;
 		}
-
-
 
 	}
 

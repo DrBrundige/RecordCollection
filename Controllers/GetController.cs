@@ -16,7 +16,7 @@ namespace IntroToEntity.Controllers
 	{
 		private Context _context;
 
-// @todo Rework Add Band, Record, Song, City to return strings
+		// @todo Rework Add Band, Record, Song, City to return strings
 
 		public GetController(Context context)
 		{
@@ -81,6 +81,35 @@ namespace IntroToEntity.Controllers
 			return Json(results);
 		}
 
+		[Route("bands")]
+		[HttpGet]
+		public JsonResult AllBands()
+		{
+			List<Band> Bands = _context.Bands.ToList();
+
+			MyAllRecordsView results = new MyAllRecordsView();
+
+			Dictionary<string, object> bandName;
+			foreach (Band band in Bands)
+			{
+				bandName = new Dictionary<string, object>();
+				if (band.DisplayName == null)
+				{
+					bandName.Add("Name", band.Name);
+				} else {
+					bandName.Add("Name", band.DisplayName);
+				}
+				bandName.Add("BandId", band.BandId);
+				results.Data.Add(bandName);
+			}
+
+			// results.Songs = _context.Songs.ToList();
+			results.Success = true;
+			results.Message = "Success! Returned some bands";
+
+			return Json(results);
+		}
+
 		[Route("musicians")]
 		[HttpGet]
 		public JsonResult AllMusicians()
@@ -108,7 +137,6 @@ namespace IntroToEntity.Controllers
 
 			return Json(results);
 		}
-
 
 		[Route("records/info/{name}")]
 		[HttpGet]
