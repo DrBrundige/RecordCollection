@@ -144,7 +144,6 @@ namespace IntroToEntity.Controllers
 					return Json(results);
 				}
 
-
 				IEnumerable<Record> records = _context.Records.Where(x => x.BandId == id);
 				int noRecords = records.Count();
 				int noSongs = 0;
@@ -184,8 +183,6 @@ namespace IntroToEntity.Controllers
 			}
 
 		}
-
-
 
 	}
 }
