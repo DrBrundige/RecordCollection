@@ -203,7 +203,7 @@ namespace IntroToEntity.Controllers
 			}
 
 			IEnumerable<MusicianToRecord> connectionExists = _context.MusicianToRecord.Where(x => x.MusicianId == thisConnection.MusicianId).Where(x => x.RecordId == thisConnection.RecordId).Where(x => x.RollId == thisConnection.RollId);
-			if (connectionExists.Count() == 0)
+			if (connectionExists.Count() > 0)
 			{
 				string message = "Error! Attempt to connect Musician " + thisConnection.MusicianId + " failed! Connection already exists!";
 				System.Console.WriteLine(message);
@@ -227,6 +227,52 @@ namespace IntroToEntity.Controllers
 			return "";
 		}
 
+		public static string ConnectTag(TagToRecord thisConnection, Context _context)
+		{
+			System.Console.WriteLine("Connecting tag: " + thisConnection.TagId + " to record " + thisConnection.RecordId);
+
+			// Checks to make sure each foreign key points to an existing row.
+			// In entity, even if an unsuccessful database insertion is enclosed in a TRY block
+			// it will still crash, so it is important to make sure this doesn't happen
+			Tag tagExists = _context.Tags.FirstOrDefault(x => x.TagId == thisConnection.TagId);
+			if (tagExists == null)
+			{
+				string message = "Error! Attempt to connect tag failed! Tag with ID " + thisConnection.TagId + " does not exist!";
+				System.Console.WriteLine(message);
+				return message;
+			}
+			Record recordExists = _context.Records.FirstOrDefault(x => x.RecordId == thisConnection.RecordId);
+			if (recordExists == null)
+			{
+				string message = "Error! Attempt to connect record failed! Record with ID " + thisConnection.RecordId + " does not exist!";
+				System.Console.WriteLine(message);
+				return message;
+			}
+
+			IEnumerable<TagToRecord> connectionExists = _context.TagToRecords.Where(x => x.TagId == thisConnection.TagId).Where(x => x.RecordId == thisConnection.RecordId);
+			if (connectionExists.Count() > 0)
+			{
+				string message = "Error! Attempt to connect Tag " + thisConnection.TagId + " failed! Connection already exists!";
+				System.Console.WriteLine(message);
+				return message;
+			}
+
+			try
+			{
+				_context.TagToRecords.Add(thisConnection);
+				_context.SaveChanges();
+			}
+			catch (System.Exception)
+			{
+				_context.TagToRecords.Remove(thisConnection);
+				string message = "Error! Attempt to connect tag " + thisConnection.TagId + " Failed!";
+				System.Console.WriteLine(message);
+				return message;
+				throw;
+			}
+
+			return "";
+		}
 
 		public static List<Dictionary<string, string>> ExtractSongs(List<Song> songsList)
 		{

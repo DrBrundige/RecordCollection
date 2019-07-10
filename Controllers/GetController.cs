@@ -34,6 +34,7 @@ namespace IntroToEntity.Controllers
 		[HttpGet]
 		public JsonResult AllSongs()
 		{
+			System.Console.WriteLine("Returning all songs");
 			List<Song> Songs = _context.Songs.ToList();
 
 			MyAllRecordsView results = new MyAllRecordsView();
@@ -60,6 +61,7 @@ namespace IntroToEntity.Controllers
 		[HttpGet]
 		public JsonResult AllRecords()
 		{
+			System.Console.WriteLine("Returning all records");
 			List<Record> Records = _context.Records.ToList();
 
 			MyAllRecordsView results = new MyAllRecordsView();
@@ -85,6 +87,7 @@ namespace IntroToEntity.Controllers
 		[HttpGet]
 		public JsonResult AllBands()
 		{
+			System.Console.WriteLine("Returning all bands");
 			List<Band> Bands = _context.Bands.ToList();
 
 			MyAllRecordsView results = new MyAllRecordsView();
@@ -114,6 +117,7 @@ namespace IntroToEntity.Controllers
 		[HttpGet]
 		public JsonResult AllMusicians()
 		{
+			System.Console.WriteLine("Returning all musicians");
 			List<Musician> Musicians = _context.Musicians.ToList();
 
 			MyAllRecordsView results = new MyAllRecordsView();
@@ -138,44 +142,52 @@ namespace IntroToEntity.Controllers
 			return Json(results);
 		}
 
-		[Route("records/info/{name}")]
+		[Route("tags")]
 		[HttpGet]
-		public JsonResult GetRecord(string name)
+		public JsonResult AllTags()
 		{
-			System.Console.WriteLine("Searching for record: " + name);
+			System.Console.WriteLine("Returning all tags");
+			List<Tag> Tags = _context.Tags.ToList();
+
+			MyAllRecordsView results = new MyAllRecordsView();
+
+			Dictionary<string, object> tagName;
+			foreach (Tag tag in Tags)
+			{
+				tagName = new Dictionary<string, object>();
+				tagName.Add("TagID", tag.TagId);
+				tagName.Add("Name", tag.Name);
+				tagName.Add("Genre", tag.Genre);
+				results.Data.Add(tagName);
+			}
+			// results.Songs = _context.Songs.ToList();
+			results.Success = true;
+			results.Message = "Success! Returned " + results.Data.Count() + " tags";
+
+			return Json(results);
+		}
+
+		[Route("records/info/{id}")]
+		[HttpGet]
+		public JsonResult GetRecord(int id)
+		{
+			System.Console.WriteLine("Searching for record: " + id);
 			MyRecordsView results = new MyRecordsView();
 
-			Record record = _context.Records.Include(x => x.Band).ThenInclude(x => x.City).FirstOrDefault(x => x.Name == name);
+			Record record = _context.Records.Include(x => x.Band).ThenInclude(x => x.City).FirstOrDefault(x => x.RecordId == id);
 			if (record != null)
 			{
 				results.Record = record;
-				// results.Songs = _context.Songs.Where(x => x.RecordId == record.RecordId).OrderBy(x => x.TrackListing).ToList();
-				// record.NoSongs = results.Songs.Count();
-
-				// results.Band = _context.Bands.Include(x => x.City).FirstOrDefault(x => x.BandId == record.BandId);
-				// results.Label = _context.Labels.FirstOrDefault(x => x.LabelId == record.LabelId);
-
-				// IEnumerable<MusicianToRecord> connections = _context.MusicianToRecord.Where(x => x.RecordId == record.RecordId);
-				// foreach (MusicianToRecord connection in connections)
-				// {
-				// 	System.Console.WriteLine(connection.MusicianId);
-				// 	results.Musicians.Add(_context.Musicians.FirstOrDefault(x => x.MusicianId == connection.MusicianId));
-				// }
-				// SELECT musicians.name, records.name, rolls.name FROM musiciantorecord
-				// JOIN musicians on musiciantorecord.MusicianId = musicians.MusicianId
-				// JOIN rolls on musiciantorecord.RollId= rolls.RollId
-				// JOIN records on musiciantorecord.RecordId = records.RecordId
-				// WHERE musiciantoRecord.recordid = 1;
 
 				results.Success = true;
-				results.Message = "Success! Returned record: " + name;
-				System.Console.WriteLine("Success! Returned record: " + name);
+				results.Message = "Success! Returned record: " + id;
+				System.Console.WriteLine("Success! Returned record: " + id);
 			}
 			else
 			{
 				results.Success = false;
-				results.Message = "Failure! Could not find record with name " + name;
-				System.Console.WriteLine("Failure! Could not find record with name " + name);
+				results.Message = "Failure! Could not find record with name " + id;
+				System.Console.WriteLine("Failure! Could not find record with name " + id);
 			}
 
 			return Json(results);

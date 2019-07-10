@@ -7,7 +7,7 @@ namespace IntroToEntity.Models
 {
 	public class MySongsView
 	{
-		
+		// Model returned from an 'all songs in record' request
 		public string Message { get; set; }
 		public bool Success { get; set; }
 		// public Dictionary<string, List<object>> Data { get; set; }

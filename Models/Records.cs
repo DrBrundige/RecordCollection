@@ -27,12 +27,15 @@ namespace IntroToEntity.Models
 		public string BandName { get; set; }
 
 		public List<Song> Songs { get; set; }
+		public List<TagToRecord> TagToRecords { get; set; }
 
-		[Required]
 		public int Year { get; set; }
 
 		[Required]
-		public int Domain { get; set; }
+		public int GenreID { get; set; }
+
+		public Genre Genre { get; set; }
+
 		public int LabelId { get; set; }
 		// public Label Label { get; set; }
 		public int Zeitgeist { get; set; }

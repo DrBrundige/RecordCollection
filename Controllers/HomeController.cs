@@ -329,7 +329,57 @@ namespace IntroToEntity.Controllers
 
 			return Json(results);
 		}
+		
+		[Route("record/connect")]
+		[HttpPost]
+		public JsonResult NewTagConnection([FromBody] MyPostView body)
+		{
+			System.Console.WriteLine("Connecting new record and tag");
+			MyResponseView results = new MyResponseView();
+			try
+			{
+				if (body.TagToRecord is TagToRecord == false)
+				{
+					results.Success = false;
+					results.Message = "Tag connection errant! ModelState invalid!";
+					System.Console.WriteLine("Tag connection errant! ModelState invalid!");
+				}
+				else if (body.TagToRecord != null)
+				{
+					// System.Console.WriteLine(body.band.Name);
+					string message = InsertionMethods.ConnectTag(body.TagToRecord, _context);
+					if (message.Equals(""))
+					{
+						// runs connectTag. If successful, Success is set to true
+						results.Success = true;
+						results.Message = "Success! Connection added!";
+						results.RowsUpdated = 1;
+					}
+					else
+					{
+						// runs AddMusician. If unsuccessful, Success is set to false
+						results.Success = false;
+						results.Message = message;
+						results.RowsUpdated = 0;
+					}
+				} else {
+					results.Success = false;
+					results.Message = "Tag connection errant! ModelState invalid!";
+					System.Console.WriteLine("Tag connection errant! ModelState invalid!");
+				}
+			}
+			catch (System.Exception E)
+			{
+				results.Success = false;
+				results.Message = "Tag connection errant! An unknowable error has occured!";
+				System.Console.WriteLine("Tag connection errant! An unknowable error has occured!");
+				System.Console.WriteLine(E);
+				return Json(results);
+				throw;
+			}
 
+			return Json(results);
+		}
 
 	}
 }

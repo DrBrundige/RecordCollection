@@ -10,10 +10,13 @@ namespace IntroToEntity.Models
 		public DbSet<Record> Records { get; set; }
 		public DbSet<Band> Bands { get; set; }
 		public DbSet<Song> Songs { get; set; }
+		public DbSet<Genre> Genres { get; set; }
 		public DbSet<Musician> Musicians { get; set; }
 		public DbSet<City> Cities { get; set; }
 		public DbSet<Label> Labels { get; set; }
 		public DbSet<Roll> Rolls { get; set; }
+		public DbSet<Tag> Tags { get; set; }
+		public DbSet<TagToRecord> TagToRecords { get; set; }
 		public DbSet<MusicianToBand> MusicianToBand { get; set; }
 		public DbSet<MusicianToRecord> MusicianToRecord { get; set; }
 	}

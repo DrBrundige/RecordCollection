@@ -16,6 +16,7 @@ namespace IntroToEntity.Models
 		public Label Label { get; set; }
 
 		public List<Musician> Musicians { get; set; }
+		public List<TagToRecord> TagToRecords { get; set; }
 
 	}
 }

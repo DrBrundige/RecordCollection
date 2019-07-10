@@ -1,3 +1,5 @@
-SELECT records.recordID, records.Name, Bands.Name FROM recordcollection.records
+SELECT records.recordID, records.Name, Bands.Name as 'Artist', genres.name as 'Genre' FROM recordcollection.records
 JOIN Bands on Bands.bandid= records.bandid
-ORDER BY bands.bandID DESC, records.year;
+JOIN Genres on records.genreid= genres.genreid
+ORDER BY bands.bandID DESC, records.year
+LIMIT 128;
