@@ -1,0 +1,12 @@
+﻿@model MyPostView
+@if (Model.band.DisplayName == null)
+	{
+	<h3>@Model.band.Name</h3>
+	} else {
+	<h3>@Model.band.DisplayName</h3>
+}
+<h4>Records</h4>
+@{@foreach (var item in Model.band.NiceRecords)
+{
+<p><a href="/recordcollection/records/@item.RecordId">@item.Name</a></p>
+}}

@@ -21,7 +21,8 @@ namespace IntroToEntity.Models
 		[NotMapped]
 		public String CityName { get; set; }
 
-		// public List<Record> Records { get; set; }
+		public List<Record> NiceRecords { get; set; }
+		public List<MusicianToBand> NiceMembers { get; set; }
 
 		[NotMapped]
 		public int NoMembers { get; set; }

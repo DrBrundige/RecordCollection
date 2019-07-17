@@ -1,0 +1,22 @@
+﻿<h3>All Bands</h3>
+@model MyPostView
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Band</th>
+			<th scope="col">City</th>
+    </tr>
+  </thead>
+  <tbody>
+		@{@foreach (var item in Model.bands)
+		{
+    <tr>
+      <th scope="row">@item.BandId</th>
+			<td><a href="bands/@item.BandId">@item.DisplayName</a></td>
+      <td>@item.City.Name, @item.City.State</td>
+    </tr>
+		}}
+  </tbody>
+</table>

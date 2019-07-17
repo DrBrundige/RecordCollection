@@ -1,0 +1,9 @@
+﻿@model MyPostView
+
+<h3>Showing Record: @Model.record.DisplayName</h3>
+<h4>Artist: <a href="/recordcollection/bands/@Model.record.BandId">@Model.record.Band.DisplayName</a></h4>
+<h4>Songs</h4>
+@{@foreach (var item in Model.record.Songs)
+{
+<p>@item.Name</p>
+}}

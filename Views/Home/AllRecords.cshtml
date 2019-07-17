@@ -1,0 +1,24 @@
+﻿<h3>All Records</h3>
+@model MyPostView
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Record</th>
+      <th scope="col">Artist</th>
+			<th scope="col">Year</th>
+    </tr>
+  </thead>
+  <tbody>
+		@{@foreach (var item in Model.records)
+		{
+    <tr>
+      <th scope="row">@item.RecordId</th>
+			<td><a href="records/@item.RecordId">@item.DisplayName</a></td>
+			<td><a href="bands/@item.BandId">@item.Band.DisplayName</a></td>
+			<td>@item.Year</td>
+    </tr>
+		}}
+  </tbody>
+</table>

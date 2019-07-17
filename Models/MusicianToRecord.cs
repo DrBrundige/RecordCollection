@@ -24,7 +24,7 @@ namespace IntroToEntity.Models
 		[NotMapped]
 		public string RollName { get; set; }
 
-		public Musician Musician { get; set; }
+		// public Musician Musician { get; set; }
 		public Record Record { get; set; }
 		public Roll Roll { get; set; }
 	}

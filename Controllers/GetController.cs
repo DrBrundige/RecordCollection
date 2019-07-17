@@ -23,13 +23,6 @@ namespace IntroToEntity.Controllers
 			_context = context;
 		}
 
-		[Route("")]
-		[HttpGet]
-		public IActionResult Index()
-		{
-			return View();
-		}
-
 		[Route("songs")]
 		[HttpGet]
 		public JsonResult AllSongs()
