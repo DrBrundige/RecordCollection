@@ -71,7 +71,7 @@ namespace IntroToEntity.Controllers
 
 			// results.Songs = _context.Songs.ToList();
 			results.Success = true;
-			results.Message = "Success! Returned some songs";
+			results.Message = "Success! Returned " + results.Data.Count() + " records";
 
 			return Json(results);
 		}
@@ -92,7 +92,9 @@ namespace IntroToEntity.Controllers
 				if (band.DisplayName == null)
 				{
 					bandName.Add("Name", band.Name);
-				} else {
+				}
+				else
+				{
 					bandName.Add("Name", band.DisplayName);
 				}
 				bandName.Add("BandId", band.BandId);

@@ -22,7 +22,7 @@ namespace IntroToEntity.Controllers
 				}
 				else
 				{
-					thisBand.CityId = 22;
+					thisBand.CityId = 0;
 				}
 				// System.Console.WriteLine(body.band.CityId);
 				thisBand.CreatedAt = DateTime.Now;
