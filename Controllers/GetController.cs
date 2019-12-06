@@ -162,7 +162,7 @@ namespace IntroToEntity.Controllers
 			return Json(results);
 		}
 
-		[Route("records/info/{id}")]
+		[Route("records/{id}")]
 		[HttpGet]
 		public JsonResult GetRecord(int id)
 		{
@@ -188,7 +188,7 @@ namespace IntroToEntity.Controllers
 			return Json(results);
 		}
 
-		[Route("records/songs/{id}")]
+		[Route("records/{id}/songs")]
 		[HttpGet]
 		public JsonResult GetSongs(int id)
 		{
@@ -223,7 +223,7 @@ namespace IntroToEntity.Controllers
 			return Json(results);
 		}
 
-		[Route("records/songs/{id}/ranked")]
+		[Route("records/{id}/ranked")]
 		[HttpGet]
 		public JsonResult TopSongs(int id)
 		{

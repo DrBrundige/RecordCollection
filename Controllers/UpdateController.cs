@@ -188,11 +188,11 @@ namespace IntroToEntity.Controllers
 
 			try
 			{
-				System.Console.WriteLine("Updating band where id is " + id);
+				System.Console.WriteLine("Updating song where id is " + id);
 
 				Song song = _context.Songs.FirstOrDefault(x => x.SongId == id);
 
-				// If band is null, no band with id exists. Otherwise continues
+				// If song is null, no song with id exists. Otherwise continues
 				if (song == null)
 				{
 					results.Success = false;
@@ -202,7 +202,7 @@ namespace IntroToEntity.Controllers
 					return Json(results);
 				}
 
-				// If record is null, no record with id exists. Otherwise continues
+				// If body.song is null, model is invalid. Otherwise continues
 				if (body.song == null)
 				{
 					results.Success = false;
@@ -229,8 +229,9 @@ namespace IntroToEntity.Controllers
 
 				if (body.song.RecordId != 0)
 				{
-					if (_context.Bands.FirstOrDefault(x => x.BandId == body.record.BandId) != null)
-						song.RecordId = body.record.BandId;
+					// If given record ID corresponds to an existing record, reassign record id
+					if (_context.Records.FirstOrDefault(x => x.RecordId == body.song.RecordId) != null)
+						song.RecordId = body.song.RecordId;
 				}
 
 				// Resets UpdatedAt timestamp
@@ -245,12 +246,13 @@ namespace IntroToEntity.Controllers
 
 				return Json(results);
 			}
-			catch (System.Exception)
+			catch (System.Exception e)
 			{
 				// results.Songs = _context.Songs.ToList();
 				results.Success = false;
 				results.RowsUpdated = 0;
 				System.Console.WriteLine("Failure! An unknown error occured! No songs updated!");
+				System.Console.WriteLine(e);
 				results.Message = "Failure! An unknown error occured! No songs updated!";
 				return Json(results);
 
