@@ -28,7 +28,6 @@ namespace IntroToEntity.Controllers
 		public JsonResult NewBands([FromBody] MyPostView body)
 		{
 			MyResponseView results = new MyResponseView();
-
 			if (body.band == null && body.bands == null)
 			{
 				results.Success = false;
@@ -123,6 +122,7 @@ namespace IntroToEntity.Controllers
 		[HttpPost]
 		public JsonResult NewSongs([FromBody] MyPostView body)
 		{
+			System.Console.WriteLine("Inserting new song(s)");
 			MyResponseView results = new MyResponseView();
 
 			if (body.song == null && body.songs == null)
@@ -160,7 +160,7 @@ namespace IntroToEntity.Controllers
 
 				results.Success = true;
 				results.RowsUpdated = count;
-				results.Message = "Success! " + count + " Records added!";
+				results.Message = "Success! " + count + " songs added!";
 			}
 
 			return Json(results);
@@ -207,6 +207,7 @@ namespace IntroToEntity.Controllers
 
 			return Json(results);
 		}
+
 
 		[Route("musician")]
 		[HttpPost]

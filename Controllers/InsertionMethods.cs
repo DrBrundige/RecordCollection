@@ -64,6 +64,18 @@ namespace IntroToEntity.Controllers
 				{
 					thisRecord.DisplayName = null;
 				}
+				if (thisRecord.LabelId == 0)
+				{
+					thisRecord.LabelId = 0;
+				}
+				if (thisRecord.Zeitgeist == 0)
+				{
+					thisRecord.Zeitgeist = 0;
+				}
+				if (thisRecord.GenreID == 0)
+				{
+					thisRecord.GenreID = 1;
+				}
 
 				// System.Console.WriteLine(body.band.CityId);
 				thisRecord.CreatedAt = DateTime.Now;

@@ -108,6 +108,36 @@ namespace IntroToEntity.Controllers
 			return Json(results);
 		}
 
+		[Route("cities")]
+		[HttpGet]
+		public JsonResult AllCities()
+		{
+			System.Console.WriteLine("Returning all cities");
+			List<City> Cities = _context.Cities.ToList();
+
+			MyAllRecordsView results = new MyAllRecordsView();
+			int rows = 0;
+
+			Dictionary<string, object> cityName;
+			foreach (City city in Cities)
+			{
+				cityName = new Dictionary<string, object>();
+				cityName.Add("Name", city.Name);
+				cityName.Add("State", city.State);
+				cityName.Add("Country", city.Country);
+				cityName.Add("CityId", city.CityId);
+				results.Data.Add(cityName);
+				rows += 1;
+			}
+
+			// results.Songs = _context.Songs.ToList();
+			results.Success = true;
+			results.Rows = rows;
+			results.Message = "Success! Returned " +rows +" cities";
+
+			return Json(results);
+		}
+
 		[Route("musicians")]
 		[HttpGet]
 		public JsonResult AllMusicians()

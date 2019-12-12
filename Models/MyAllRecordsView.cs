@@ -12,6 +12,7 @@ namespace IntroToEntity.Models
 		public bool Success { get; set; }
 		// public Dictionary<string, List<object>> Data { get; set; }
 		public List<Dictionary<string, object>> Data { get; set; }
+		public int Rows { get; set; }
 
 		public MyAllRecordsView(){
 			Data = new List<Dictionary<string, object>>();
